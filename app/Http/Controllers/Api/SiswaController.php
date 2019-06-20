@@ -16,8 +16,8 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return Siswa::all();
-        if (!siswa) {
+        return siswa::all();
+        if (!$siswa) {
             $response =  [
                 'success' => false,
                 'data'  => 'Empty',
@@ -163,6 +163,22 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $siswa = Siswa::find($id);
+
+        if ($siswa) {
+            $response = [
+                'success' => false,
+                'data' => 'gagal update.',
+                'message' => 'Siswa Tidak Ditemukan.'
+            ];
+            return response()->json($response, 404);
+        }
+        $siswa->delete();
+        $response = [
+            'success' => true,
+            'data' => 'siswa.',
+            'message' => 'Siswa berhasil di hapus.'
+        ];
+        return response()->json($response, 200);
     }
 }
