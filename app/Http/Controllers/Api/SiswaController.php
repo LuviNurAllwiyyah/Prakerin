@@ -23,7 +23,6 @@ class SiswaController extends Controller
                 'data'  => 'Empty',
                 'message' => 'Siswa Tidak Ditemukan .'
             ];
-            return response()->json($response, 404);
         }
 
         $response =  [
