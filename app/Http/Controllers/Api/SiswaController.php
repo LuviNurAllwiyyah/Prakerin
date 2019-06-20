@@ -17,7 +17,7 @@ class SiswaController extends Controller
     public function index()
     {
         return siswa::all();
-        if (!$siswa) {
+        if (!siswa) {
             $response =  [
                 'success' => false,
                 'data'  => 'Empty',
