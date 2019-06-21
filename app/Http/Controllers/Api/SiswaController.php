@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Siswa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use  Validator;
 
 class SiswaController extends Controller
 {
@@ -16,19 +16,19 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return siswa::all();
-        if (!siswa) {
+        $siswa = Siswa::all();
+        if (count($siswa) <= 0) {
             $response =  [
                 'success' => false,
                 'data'  => 'Empty',
                 'message' => 'Siswa Tidak Ditemukan .'
             ];
+            return response()->json($response, 404);
         }
-
         $response =  [
             'success' => true,
             'data' => $siswa,
-            'message' => 'Berhasil.'
+            'message' => 'Data siswa berhasil diambil'
         ];
 
         return response()->json($response, 200);
@@ -58,7 +58,7 @@ class SiswaController extends Controller
 
         // 2.Buat validasi ditampung ke $validator
         $validator = Validator::make($input, [
-            'nama' => 'required|min:15'
+            'nama' => 'required|min15'
         ]);
 
         // 3.Chek validasi
@@ -68,7 +68,7 @@ class SiswaController extends Controller
                 'data' => 'Validation Error.',
                 'message' => $validator->errors()
             ];
-            return response()->json($response, 500);
+            return response()->json($response, 404);
         }
 
         // 4.Buat fungsi untuk menghandle semua inputan ->
@@ -79,7 +79,7 @@ class SiswaController extends Controller
         $response = [
             'success' => true,
             'data' => $siswa,
-            'message' => 'Siswa Berhasil ditambahkan.'
+            'message' => 'Data siswa Berhasil ditambahkan.'
         ];
 
         // 6. Tampilkan hasil
