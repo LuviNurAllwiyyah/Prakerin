@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,10 +31,27 @@ Route::get('/join', function () {
     return view('join');
 });
 
-Route::get('advertisement/', function () {
+Route::get('/advertisement', function () {
     return view('advertisement');
 });
 
 Route::get('/contact', function () {
     return view('contact');
 });
+
+Route::group(
+    ['prefix' => 'admin', 'middleware' => 'auth'],
+    function () {
+        Route::get('/', function () {
+            return view('layouts.backend');
+        });
+        Route::resource('Kategori', 'KategoriController');
+        Route::resource('Tag', 'TagController');
+        Route::resource('Artikel', 'ArtikelController');
+    }
+);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', 'HomeController@logout')->name('logout');

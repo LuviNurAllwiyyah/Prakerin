@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Siswa;
 use Illuminate\Http\Request;
 use  Validator;
+use App\Kategori1;
 
 class SiswaController extends Controller
 {
