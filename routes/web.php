@@ -46,7 +46,7 @@ Route::group(
             return view('layouts.backend');
         });
         Route::resource('Kategori', 'KategoriController');
-        Route::resource('Tag', 'TagController@index');
+        Route::resource('Tag', 'TagController');
         Route::resource('Artikel', 'ArtikelController');
     }
 );
